@@ -27,7 +27,10 @@ function App() {
   }, [])
 
   const handleClick = () => {
-    setIsOpen(!isOpen)
+    console.log('handle click');
+    if(isOpen){
+      setIsOpen(!isOpen)
+    }
   }
 
   if(isLoading){
@@ -37,7 +40,7 @@ function App() {
   return (
     <ThemeContext.Provider value={{dark, setDark}}>
         <div className="dark:bg-VeryDarkBlue bg-VeryLightGray relative z-30 top-0 left-0">
-        <div className="w-screen bg-black absolute z-30 top-0 left-0 h-screen" onClick={handleClick}>
+        <div className={`w-screen bg-black absolute z-30 top-0 left-0 h-screen ${isOpen ? 'block' : 'hidden'}`} onClick={handleClick}>
 
         </div>
             <Navbar />
