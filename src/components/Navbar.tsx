@@ -8,7 +8,7 @@ interface IAppProps {
 const Navbar: React.FunctionComponent<IAppProps> = (props) => {
 
   const {dark, setDark} = useContext(ThemeContext)
-
+  
   return (
       <nav className="py-6 drop-shadow dark:bg-DarkBlue dark:text-White bg-White text-LightVeryDarkBlue">
           <div className="flex justify-between items-center mx-auto w-11/12">
