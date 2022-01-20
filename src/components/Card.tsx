@@ -4,14 +4,14 @@ interface IAppProps {
     flag: string,
     population: number,
     region: string,
-    capital: string
+    capital: string,
 }
 
 const Card: React.FunctionComponent<IAppProps> = ({name, flag, population, region, capital}) => {
   return (
-      <div className="dark:bg-DarkBlue bg-White rounded-md my-4 dark:text-White text-LightVeryDarkBlue max-h-90 drop-shadow" key={Math.random()}>
-          <div className="h-1/2">
-              <img src={flag} className="" alt={name} />
+      <div className="dark:bg-DarkBlue  max-w-xl bg-White rounded-md my-4 mx-auto md:max-w-xs lg:w-72 xl:w-64 dark:text-White text-LightVeryDarkBlue max-h-90 drop-shadow" key={population+Math.random()}>
+          <div className="h-1/2 ">
+              <img src={flag} className="rounded-md" alt={name} />
           </div>
           <div className="p-8 space-y-3">
               <p className="font-extrabold " >{name}</p>

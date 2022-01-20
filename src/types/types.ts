@@ -7,5 +7,6 @@ export interface Countries {
     },
     population: number,
     region: string,
-    capital: string
+    capital: string,
+
 }
