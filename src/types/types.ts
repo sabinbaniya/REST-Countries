@@ -1,4 +1,4 @@
-export interface Countries {
+export interface CountriesInterface {
     name: {
         common: string
     },

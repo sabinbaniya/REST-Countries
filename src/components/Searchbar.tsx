@@ -20,7 +20,7 @@ const Searchbar: React.FunctionComponent= () => {
       timer = setTimeout(async () => {
         let data = await searchCountry(value)
         setSearchedCountry(data)
-      },2000)
+      },750)
 
   }
 
