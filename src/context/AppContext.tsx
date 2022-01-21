@@ -6,10 +6,10 @@ const Theme= {
     setDark: (dark: boolean) => {}
 }
 
-// const Theme= {
-//     dark: false,
-//     setDark: (dark: boolean) => {}
-// }
+const Loading= {
+    isLoading: true,
+    setIsLoading: (isLoading: boolean) => {}
+}
 
 const SearchedCountry= {
     searchedCountry: {} as CountriesInterface[],
@@ -27,6 +27,7 @@ const Countries= {
 }
 
 export const ThemeContext = createContext(Theme)
+export const LoadingContext = createContext(Loading)
 export const CountryContext = createContext(Countries)
 export const SearchedCountryContext = createContext(SearchedCountry)
 export const FilteredCountryContext = createContext(FilteredCountry)

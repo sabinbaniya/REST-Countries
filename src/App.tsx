@@ -5,7 +5,7 @@ import Filter from './components/Filter';
 import Navbar from './components/Navbar'
 import Searchbar from './components/Searchbar';
 import Loader from './helpers/Loader';
-import { CountryContext, ThemeContext, SearchedCountryContext, FilteredCountryContext } from './context/AppContext';
+import { CountryContext, ThemeContext, SearchedCountryContext, FilteredCountryContext, LoadingContext } from './context/AppContext';
 import { requestCountries } from './helpers/RequestCountries';
 import { CountriesInterface } from './types/types';
 
@@ -35,6 +35,7 @@ function App() {
       console.log(searchedCountry);
       setFilteredCountry({} as CountriesInterface[])
       setCountry(searchedCountry)
+      setIsLoading(false)
     }
 
   }, [searchedCountry])
@@ -47,47 +48,49 @@ function App() {
 
   return (
     <CountryContext.Provider value={{country, setCountry}}>
-      <ThemeContext.Provider value={{dark, setDark}}>
-        <SearchedCountryContext.Provider value={{searchedCountry, setSearchedCountry}}>
-          <FilteredCountryContext.Provider value={{filteredCountry, setFilteredCountry}}>
-            <div className="dark:bg-VeryDarkBlue bg-VeryLightGray relative z-30 top-0 left-0 min-h-screen">
-            <div className={`w-screen bg-black absolute z-30 top-0 left-0 h-screen ${isOpen ? 'block' : 'hidden'}`} onClick={handleClick}>
+        <ThemeContext.Provider value={{dark, setDark}}>
+          <SearchedCountryContext.Provider value={{searchedCountry, setSearchedCountry}}>
+            <FilteredCountryContext.Provider value={{filteredCountry, setFilteredCountry}}>
+              <LoadingContext.Provider value={{isLoading, setIsLoading}}>
+                <div className="dark:bg-VeryDarkBlue bg-VeryLightGray relative z-30 top-0 left-0 min-h-screen">
+                <div className={`w-screen bg-black absolute z-30 top-0 left-0 h-screen ${isOpen ? 'block' : 'hidden'}`} onClick={handleClick}>
 
-            </div>
-                <Navbar />
-                <div className="md:flex w-11/12 mx-auto justify-between items-center md:space-x-4">
-                  <Searchbar />
-                  <Filter isOpen={isOpen} setIsOpen={setIsOpen}/>
                 </div>
-                <div>
-                  <div className="w-11/12 mx-auto pt-4 pb-8 md:flex md:flex-wrap">
-                  { // loader
-                    isLoading &&
-                    <div className="grid md:grid-cols-2 md:grid-rows-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4 xl:grid-rows-1 mx-auto ">
-                      <Loader bgColor={dark ? '#2b3945' : '#e6e6e6'} foregroundColor={dark ? '#3b4d5e' : '#ffffff'} />
-                      <Loader bgColor={dark ? '#2b3945' : '#e6e6e6'} foregroundColor={dark ? '#3b4d5e' : '#ffffff'} />
-                      <Loader bgColor={dark ? '#2b3945' : '#e6e6e6'} foregroundColor={dark ? '#3b4d5e' : '#ffffff'} />
-                      <Loader bgColor={dark ? '#2b3945' : '#e6e6e6'} foregroundColor={dark ? '#3b4d5e' : '#ffffff'} />
+                    <Navbar />
+                    <div className="md:flex w-11/12 mx-auto justify-between items-center md:space-x-4">
+                      <Searchbar />
+                      <Filter isOpen={isOpen} setIsOpen={setIsOpen}/>
                     </div>
+                    <div>
+                      <div className="w-11/12 mx-auto pt-4 pb-8 md:flex md:flex-wrap">
+                      { // loader
+                        isLoading &&
+                        <div className="grid md:grid-cols-2 md:grid-rows-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4 xl:grid-rows-1 mx-auto ">
+                          <Loader bgColor={dark ? '#2b3945' : '#e6e6e6'} foregroundColor={dark ? '#3b4d5e' : '#ffffff'} />
+                          <Loader bgColor={dark ? '#2b3945' : '#e6e6e6'} foregroundColor={dark ? '#3b4d5e' : '#ffffff'} />
+                          <Loader bgColor={dark ? '#2b3945' : '#e6e6e6'} foregroundColor={dark ? '#3b4d5e' : '#ffffff'} />
+                          <Loader bgColor={dark ? '#2b3945' : '#e6e6e6'} foregroundColor={dark ? '#3b4d5e' : '#ffffff'} />
+                        </div>
 
-                  }
-                  { // countries
-                    country && Object.keys(filteredCountry).length === 0 && 
-                    country.map(country => {
-                      return <Card flag={country.flags.svg} name={country.name.common} population={country.population} region={country.region} capital={country.capital} />
-                    })
-                  }{ //filtered countries
-                    Object.keys(filteredCountry).length > 0 && 
-                    filteredCountry.map(country => {
-                      return <Card flag={country.flags.svg} name={country.name.common} population={country.population} region={country.region} capital={country.capital} />
-                    })
-                  }
-                  </div>
+                      }
+                      { // countries
+                        country && Object.keys(filteredCountry).length === 0 && 
+                        country.map(country => {
+                          return <Card flag={country.flags.svg} name={country.name.common} population={country.population} region={country.region} capital={country.capital} />
+                        })
+                      }{ //filtered countries
+                        Object.keys(filteredCountry).length > 0 && 
+                        filteredCountry.map(country => {
+                          return <Card flag={country.flags.svg} name={country.name.common} population={country.population} region={country.region} capital={country.capital} />
+                        })
+                      }
+                      </div>
+                    </div>
                 </div>
-            </div>
-          </FilteredCountryContext.Provider>
-          </SearchedCountryContext.Provider>
-      </ ThemeContext.Provider>
+              </LoadingContext.Provider>
+            </FilteredCountryContext.Provider>
+            </SearchedCountryContext.Provider>
+        </ ThemeContext.Provider>
     </ CountryContext.Provider>
   )
 }

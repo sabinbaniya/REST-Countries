@@ -1,16 +1,18 @@
 import { ChangeEvent, useContext } from 'react';
 import {BiSearchAlt2} from 'react-icons/bi'
-import { SearchedCountryContext } from '../context/AppContext';
+import { SearchedCountryContext,LoadingContext } from '../context/AppContext';
 import { searchCountry } from '../helpers/RequestCountries';
 
 
 const Searchbar: React.FunctionComponent= () => {
 
   const {setSearchedCountry} = useContext(SearchedCountryContext)
+  const {setIsLoading} = useContext(LoadingContext)
 
   let timer: any
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+      setIsLoading(true)
       if(timer){
         clearTimeout(timer)
       }
