@@ -12,7 +12,7 @@ import { CountriesInterface } from './types/types';
 
 function App() {
 
-  const [dark, setDark] = useState<boolean>(true)
+  const [dark, setDark] = useState<boolean>(false)
   const [country, setCountry] = useState<CountriesInterface[] | undefined>(undefined)
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(true)
