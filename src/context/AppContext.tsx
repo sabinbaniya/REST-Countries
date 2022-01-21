@@ -6,6 +6,11 @@ const Theme= {
     setDark: (dark: boolean) => {}
 }
 
+// const Theme= {
+//     dark: false,
+//     setDark: (dark: boolean) => {}
+// }
+
 const SearchedCountry= {
     searchedCountry: {} as CountriesInterface[],
     setSearchedCountry: (searchedCountry: CountriesInterface[]) => {}
