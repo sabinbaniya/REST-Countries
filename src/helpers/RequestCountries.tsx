@@ -27,3 +27,15 @@ export const searchCountry = async (query: string) => {
         console.log(error);
     }
 }
+
+export const detailCountry = async (country: string | undefined) => {
+    try {
+        const res = await fetch(`https://restcountries.com/v3.1/name/${country}?fullText=true`)
+        const data = await res.json()
+
+        return data
+
+    }catch(e){
+        console.log(e);
+    }
+}
