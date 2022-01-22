@@ -25,3 +25,13 @@ export interface DetailsInterface {
     currencies: {},
     languages: {},
 }
+
+export type Obj = {
+   [index: string]: {
+     name: string
+   }
+}
+
+export type Obj2 = {
+   [index: string]: string
+}
