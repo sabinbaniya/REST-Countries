@@ -36,17 +36,17 @@ const Detail: FC = () => {
                         detail &&
                         detail?.map(item => {
 
-                            let obj: Obj = item.currencies;
+                            let obj: Obj = item?.currencies || {eng: {name: 'no currencies found'}};
                             let arr = Object.keys(obj);
-                            let obj2: Obj2 = item.languages;
+                            let obj2: Obj2 = item?.languages  || {eng: 'no languages found'};
                             let arr2 = Object.keys(obj2);
 
                             return (
                                 <div key={item.altSpellings[1]} className="flex flex-wrap dark:text-White text-LightVeryDarkBlue">
-                                    <div className="basis-2/4">
+                                    <div className="pr-10 flex items-center justify-center">
                                         <img className="max-h-96 max-w-sm" src={item?.flags.svg} alt={item.altSpellings[0]} />
                                     </div>
-                                    <div className="my-10">
+                                    <div className="my-10 basis-2/4">
                                         <div>
                                             <p className="text-2xl font-bold mb-8">{country}</p>
                                         </div>
